@@ -15,7 +15,7 @@ st.caption("Payroll costs, workforce movement, earnings and deductions")
 st.divider()
 
 # ---- Data loading ----
-df=pd.read_parquet(r'/Users/menna/Python/EDA/Final Project/Code/Cleaned data.parquet')
+df=pd.read_parquet('Cleaned data.parquet')
 
 # ---- Filters ----
 st.markdown("##### Filter the report")
