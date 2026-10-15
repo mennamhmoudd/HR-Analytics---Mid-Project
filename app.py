@@ -18,28 +18,28 @@ st.sidebar.caption("HR · People · Performance · Insights")
 
 # ---- Payroll pages ----
 payroll_dashboard = st.Page(
-    r"/Users/menna/Python/EDA/Final Project/Code/pages/Payroll.py",
+    r"pages/Payroll.py",
     title="Payroll Dashboard",
     icon=":material/dashboard:",
     default=True,
 )
 
 voice_assistant = st.Page(
-    r"/Users/menna/Python/EDA/Final Project/Code/pages/Voice Assistant.py",
+    r"pages/Voice Assistant.py",
     title="AI Assistant",
     icon=":material/smart_toy:",
 )
 
 # ---- Recruitment pages ----
 recruitment_dashboard = st.Page(
-    r"/Users/menna/Python/EDA/Final Project/Code/pages/Recruitment Dashboard.py",
+    r"pages/Recruitment Dashboard.py",
     title="Recruitment Dashboard",
     icon=":material/dashboard:",
 )
 
 # NOTE: the original path had no ".py" extension, which makes st.Page fail.
 recruitment_reports = st.Page(
-    r"/Users/menna/Python/EDA/Final Project/Code/pages/Recruitment Reports.py",
+    r"pages/Recruitment Reports.py",
     title="Recruitment Reports",
     icon=":material/assessment:",
 )
