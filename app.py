@@ -11,7 +11,7 @@ st.set_page_config(
 apply_app_theme(show_toggle=True)
 
 # ---- Company logo ----
-st.logo("Code/IMG_1343.png", size="large")
+st.logo("IMG_1343.png", size="large")
 
 st.sidebar.markdown("### HR Analytics")
 st.sidebar.caption("HR · People · Performance · Insights")
