@@ -1,0 +1,13 @@
+# Streamlit Web Application Dependencies
+# Extracted from conda environment: da_env
+
+streamlit==1.65.0
+pandas==3.0.5
+numpy==2.5.1
+plotly==6.9.0
+pyarrow==25.0.1
+requests==2.34.2
+python-dotenv==1.2.4
+gTTS==2.5.4
+tabulate==0.10.0
+openpyxl==3.1.5

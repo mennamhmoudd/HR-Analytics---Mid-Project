@@ -1,0 +1,83 @@
+[theme]
+base = "light"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+baseFontSize = 14
+baseFontWeight = 400
+codeFontSize = "0.85rem"
+headingFontSizes = ["28px", "22px", "18px", "16px", "14px", "12px"]
+headingFontWeights = [600, 600, 600, 500, 500, 500]
+linkUnderline = false
+baseRadius = "8px"
+buttonRadius = "8px"
+showWidgetBorder = true
+showSidebarBorder = true
+
+# Chart colors — corporate navy palette with gold accent
+chartCategoricalColors = ["#1B2A4A", "#B8973E", "#3B6B9E", "#6B8F71", "#8B6F47", "#5A7FA0", "#9B8B6E"]
+chartSequentialColors = ["#F0F4F8", "#D1DDE8", "#A3BCD5", "#7A9DC2", "#517EAF", "#1B2A4A", "#162340", "#112036", "#0C1A2C", "#081422"]
+
+# Dataframe styling
+dataframeHeaderBackgroundColor = "#1B2A4A"
+dataframeHeaderTextColor = "#FFFFFF"
+dataframeBorderColor = "#E2E8F0"
+
+[theme.light]
+primaryColor = "#1B2A4A"
+backgroundColor = "#F8F9FB"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1A202C"
+borderColor = "#E2E8F0"
+linkColor = "#1B2A4A"
+codeTextColor = "#1A202C"
+codeBackgroundColor = "#F1F5F9"
+
+redColor = "#DC2626"
+orangeColor = "#D97706"
+yellowColor = "#CA8A04"
+greenColor = "#16A34A"
+blueColor = "#2563EB"
+violetColor = "#7C3AED"
+grayColor = "#64748B"
+
+chartCategoricalColors = ["#1B2A4A", "#B8973E", "#3B6B9E", "#6B8F71", "#8B6F47", "#5A7FA0", "#9B8B6E"]
+
+[theme.light.sidebar]
+backgroundColor = "#1B2A4A"
+secondaryBackgroundColor = "#243556"
+textColor = "#E2E8F0"
+borderColor = "#2D4A6F"
+primaryColor = "#B8973E"
+codeBackgroundColor = "#243556"
+
+[theme.dark]
+primaryColor = "#B8973E"
+backgroundColor = "#0F1724"
+secondaryBackgroundColor = "#1A2332"
+textColor = "#E2E8F0"
+borderColor = "#2D3748"
+linkColor = "#B8973E"
+codeTextColor = "#E2E8F0"
+codeBackgroundColor = "#1A2332"
+
+redColor = "#EF4444"
+orangeColor = "#F59E0B"
+yellowColor = "#EAB308"
+greenColor = "#22C55E"
+blueColor = "#60A5FA"
+violetColor = "#A78BFA"
+grayColor = "#94A3B8"
+
+chartCategoricalColors = ["#60A5FA", "#B8973E", "#67E8F9", "#86EFAC", "#FCD34D", "#C4B5FD", "#FCA5A5"]
+
+dataframeHeaderBackgroundColor = "#1A2332"
+dataframeHeaderTextColor = "#E2E8F0"
+dataframeBorderColor = "#2D3748"
+
+[theme.dark.sidebar]
+backgroundColor = "#0B1120"
+secondaryBackgroundColor = "#0F1724"
+textColor = "#E2E8F0"
+borderColor = "#1E293B"
+primaryColor = "#B8973E"
+codeBackgroundColor = "#0F1724"
