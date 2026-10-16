@@ -119,23 +119,23 @@ with tab1:
         char1 , char2 = st.columns(2)
 
         with char1:
-            filterd_data['hire_Month'] = filterd_data['Hire Date'].dt.month
-            filterd_data['hire_month_name']= filterd_data['Hire Date'].dt.month_name()
+            filterd_data['hire_Month_overall'] = filterd_data['Hire Date'].dt.month
+            filterd_data['hire_month_name_overall']= filterd_data['Hire Date'].dt.month_name()
 
             total_hires = (
                             filterd_data[
                                 filterd_data['Hire Date'].dt.year == 2026
                                 ]
                             .groupby(
-                                ['hire_Month' , 'hire_month_name']
+                                ['hire_Month_overall' , 'hire_month_name_overall']
                                 )['Employee ID']
                             .nunique()
-                            .reset_index().sort_values(by='hire_Month')
+                            .reset_index().sort_values(by='hire_Month_overall')
                             )
-            hire_ooverall_pie = px.line(data_frame=total_hires , x='hire_month_name' , y='Employee ID',text='Employee ID',title ='New hires',labels ={'Employee ID': 'Total Employees'}).update_traces(textposition = 'top center')
+            hire_overall_pie = px.line(data_frame=total_hires , x='hire_month_name_overall' , y='Employee ID',text='Employee ID',title ='New hires',labels ={'Employee ID': 'Total Employees' , 'hire_month_name_overall': 'Month'}).update_traces(textposition = 'top center')
         
-            apply_chart_theme(hire_ooverall_pie)
-            st.plotly_chart(hire_ooverall_pie, use_container_width = True)
+            apply_chart_theme(hire_overall_pie)
+            st.plotly_chart(hire_overall_pie, use_container_width = True , key='overall_hires')
         
         with char2:
             total_increase_per_month = (
