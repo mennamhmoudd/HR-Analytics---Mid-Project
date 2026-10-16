@@ -132,10 +132,10 @@ with tab1:
                             .nunique()
                             .reset_index().sort_values(by='hire_Month')
                             )
-            hire_pie = px.line(data_frame=total_hires , x='hire_month_name' , y='Employee ID',text='Employee ID',title ='New hires',labels ={'Employee ID': 'Total Employees'}).update_traces(textposition = 'top center')
+            hire_ooverall_pie = px.line(data_frame=total_hires , x='hire_month_name' , y='Employee ID',text='Employee ID',title ='New hires',labels ={'Employee ID': 'Total Employees'}).update_traces(textposition = 'top center')
         
-            apply_chart_theme(hire_pie)
-            st.plotly_chart(hire_pie, use_container_width = True)
+            apply_chart_theme(hire_ooverall_pie)
+            st.plotly_chart(hire_ooverall_pie, use_container_width = True)
         
         with char2:
             total_increase_per_month = (
