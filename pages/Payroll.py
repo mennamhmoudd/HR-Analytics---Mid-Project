@@ -380,10 +380,11 @@ with tab3:
                 xaxis_title='Month',
                 legend_title='',
                 hovermode='x unified'
+                
             )
 
             fig.update_yaxes(title_text='Total Bonus', secondary_y=False)
-            fig.update_yaxes(title_text='Total Employees', secondary_y=True)
+            fig.update_yaxes(title_text='Total Employees', secondary_y=True,dtick=5)
 
             apply_chart_theme(fig)
             st.plotly_chart(fig, use_container_width=True)
@@ -398,7 +399,8 @@ with tab3:
                 text_auto = True,
                 labels= {
                     'Total Variable Pay': 'Total Earnings'
-                }
+                },
+                title = 'Total Bonus per Departments'
             )
             apply_chart_theme(fig_bar_dep)
             st.plotly_chart(
