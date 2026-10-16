@@ -458,7 +458,7 @@ with tab4:
                 total_pen_dep = filtered_ded_data.groupby(['Salaries Month' , 'Month_num']).agg(
                         TotalEmployees = ('Employee ID','nunique'),
                         Value = ('Total Penalties' , 'sum')
-                    ).reset_index().sort_values(by='Month_num')
+                    ).reset_index().sort_values(by='Month_num').round(2)
                 pnlt_fig = px.line(
                         data_frame=total_pen_dep,
                         x='Salaries Month',
