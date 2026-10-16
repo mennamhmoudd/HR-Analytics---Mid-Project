@@ -437,7 +437,7 @@ with tab4:
             #left-up-charts
             with st.container(border = True):
                 st.markdown("#### Total penalties")
-                filtered_ded_data = filterd_data[filterd_data['Total Penalties'].notna()]
+                filtered_ded_data = filterd_data[filterd_data['Total Penalties']>0]
                 with st.container():
                         card_emp , card_val= st.columns(2)
                         with card_emp:
@@ -499,7 +499,7 @@ with tab4:
                             .agg(
                                 Total_Employees=('Employee ID','nunique'),
                                 Total_Days=('Administrative Penalty (Days)','sum'))
-                            .reset_index()
+                            .reset_index().round(2)
                             )
                 admin_pnlt = px.bar(data_frame=total_employess_admin_pnlties_ch,y='Department', x=['Total_Employees','Total_Days'] , title= 'Total administrative penalty per department' , text_auto = True, barmode='group')
                 apply_chart_theme(admin_pnlt)
