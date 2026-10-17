@@ -188,90 +188,95 @@ with tab2:
                     )
 
         #right chart - top
-        with right:
-            metrics , tor = st.columns([1,1.5], gap= 'medium')
-            with metrics:
-               
-                with st.container( border= False):
-                    total_new_hires = filterd_data[filterd_data['Hire Date'].dt.year == 2026]['Employee ID'].nunique()
-                    total_hires = 1200
-                    total_new_leaves = filterd_data[filterd_data['Hire Date'].dt.year == 2026]['Termination Reason'].count()
-                    total_leaves = 640
 
+        with right:
+            top_cards = st.container(height = 110 , border = False)
+            with top_cards:
+                total_employees_overall = 1200
+                col1 , col2 , col3 = st.columns(3)
+                with col1:
+                    st.metric(
+                        'Total Employees',
+                        f'{total_employees_overall}'
+                    )
+                total_leaves_overall = 254
+                with col2:
+                    st.metric(
+                        'Total Leaves',
+                        f'{total_leaves_overall}'
+                    )
+                all_turn_over_ratio = (total_leaves_overall / total_employees_overall )*100
+                with col3:
+                    st.metric(
+                        'Turnover ratio' , 
+                        f'{all_turn_over_ratio : .1f}%'
+                    )
+            middle_cards = st.container()
+            with middle_cards:
+                cards , charts = st.columns([1,2] , gap='medium')
+                with cards:             
+                    total_new_hires = filterd_data[filterd_data['Hire Date'].dt.year == 2026]['Employee ID'].nunique()
+                    total_new_leaves = filterd_data[filterd_data['Hire Date'].dt.year == 2026]['Termination Reason'].count()
                     turn_over_ratio = 0
                     if total_new_hires ==0:
                         turn_over_ratio == 0
                     else:
                         turn_over_ratio= (total_new_leaves / total_new_hires) * 100
+                    with st.container(height = 110, border = False):
+                        st.metric('2026 hires' ,f'{total_new_hires : ,}' )
 
-                    all_turn_over_ratio = (total_leaves / total_hires )*100
-                    
-                    col1 , col2  = st.columns(2)
-                    
-                    with col1:
-                        with st.container(height = 120, border = False):
-                            st.metric('2026 hires' ,f'{total_new_hires : ,}' )
-                    with col2:
-                        with st.container(height = 120, border = False):
-                            st.metric('Total employees' , f'{total_hires: ,}')
-                    
-                    col3 , col4 = st.columns(2)
+                    with st.container(height = 110, border = False):
+                        st.metric('2026 leaves' ,f'{total_new_leaves : ,}' )
 
-                    with col3:
-                        with st.container(height = 120, border = False):
-                            st.metric('2026 leaves' ,f'{total_new_leaves : ,}' )
-                    with col4:
-                        with st.container(height = 120, border = False):
-                            st.metric('Total leaves' ,f'{total_leaves: ,}')
+                    with st.container(height = 110, border = False):
+                        st.metric('2026 turnover ratio' ,f'{turn_over_ratio: .1f}%' )
 
-                    col5 , col6 = st.columns(2)
-
-                    with col5:
-                        with st.container(height = 120, border = False):
-                            st.metric('2026 turnover ratio' ,f'{turn_over_ratio: .1f}%' )
-                    with col6:
-                        with st.container(height = 120, border = False):
-                            st.metric('Turnover ratio' , f'{all_turn_over_ratio : .1f}%')
-            with tor:
+                with charts:
+                    with st.container():
+                                        total_leaves_titles = (
+                                                                filterd_data.groupby('Job Title')
+                                                                .agg(
+                                                                        Total_Employees = ('Employee ID' , 'nunique'),
+                                                                        Total_Leaves= ('Termination Reason','count')
+                                                                )
+                                                                .reset_index())
+                                        total_leaves_titles['Turnover_Ratio'] = (
+                                                                total_leaves_titles['Total_Leaves']
+                                                                .div(total_leaves_titles['Total_Employees'])
+                                                                .mul(100)
+                                                                .fillna(0)
+                                                                .round()
+                                                            )
+                                        total_leaves_titles['Turnover_Ratio'] = (
+                                                                total_leaves_titles['Turnover_Ratio'].map('{:.1f}%'.format)
+                                                            )
+                                        total_leaves_titles = total_leaves_titles.rename(
+                                             columns={'Job Title': 'Job Title' ,
+                                                      'Total_Employees' : 'Total Employees' ,
+                                                      'Total_Leaves' : 'Total Leaves' , 
+                                                      'Turnover_Ratio' :  'Turnover Ratio'
+                                                      })
+                                        
+                                        st.dataframe(total_leaves_titles,
+                                                        hide_index= True)
+            bottom_charts = st.container()
+            with bottom_charts:
                 with st.container():
-                    total_leaves_titles = (
-                                            filterd_data.groupby('Job Title')
-                                            .agg(
-                                                    Total_Leaves= ('Termination Reason','count'),
-                                                    Total_Employees = ('Employee ID' , 'nunique')
-                                            )
-                                            .reset_index())
-                    total_leaves_titles['Turnover_Ratio'] = (
-                                            total_leaves_titles['Total_Leaves']
-                                            .div(total_leaves_titles['Total_Employees'])
-                                            .mul(100)
-                                            .fillna(0)
-                                            .round()
-                                        )
-                    total_leaves_titles['Turnover_Ratio'] = (
-                                            total_leaves_titles['Turnover_Ratio'].map('{:.1f}%'.format)
-                                        )
-                    
-                    st.dataframe(total_leaves_titles,
-                                    hide_index= True)
-            
-                    
-            with st.container():
-                filterd_data['hire_Month'] = filterd_data['Hire Date'].dt.month
-                filterd_data['hire_month_name']= filterd_data['Hire Date'].dt.month_name()
-                total_hires = (
-                                filterd_data[
-                                    filterd_data['Hire Date'].dt.year == 2026
-                                    ]
-                                .groupby(
-                                    ['hire_Month' , 'hire_month_name']
-                                    )['Employee ID']
-                                .nunique()
-                                .reset_index().sort_values(by='hire_Month')
-                                )
-                hire_pie = px.line(data_frame=total_hires , x='hire_month_name' , y='Employee ID',text='Employee ID',title ='New hires',labels ={'Employee ID': 'Total Employees', 'hire_month_name': 'Month'}).update_traces(textposition = 'top center')
-                apply_chart_theme(hire_pie)
-                st.plotly_chart(hire_pie,use_container_width=True)
+                                filterd_data['hire_Month'] = filterd_data['Hire Date'].dt.month
+                                filterd_data['hire_month_name']= filterd_data['Hire Date'].dt.month_name()
+                                total_hires = (
+                                                filterd_data[
+                                                    filterd_data['Hire Date'].dt.year == 2026
+                                                    ]
+                                                .groupby(
+                                                    ['hire_Month' , 'hire_month_name']
+                                                    )['Employee ID']
+                                                .nunique()
+                                                .reset_index().sort_values(by='hire_Month')
+                                                )
+                                hire_pie = px.line(data_frame=total_hires , x='hire_month_name' , y='Employee ID',text='Employee ID',title ='New hires',labels ={'Employee ID': 'Total Employees', 'hire_month_name': 'Month'}).update_traces(textposition = 'top center')
+                                apply_chart_theme(hire_pie)
+                                st.plotly_chart(hire_pie,use_container_width=True)                   
 
 # ===========================================================================
 # Earning Details Tab
@@ -530,7 +535,7 @@ with tab4:
                         label = "Absence ratio",
                         value = f'{absence_ratio}%',
                         delta = "Target: 10%",
-                        delta_color="inverse"
+                        
                         )
                   
                 filtered_absence_data = filterd_data[filterd_data['Absence Days'].notna()]
